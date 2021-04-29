@@ -1,0 +1,65 @@
+# 服务端口号
+server:
+  port: 8081
+
+spring:
+  application:
+    name: resident-temperature-monitoring-system-backstage-service
+
+  # 配置Nacos地址
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 182.92.106.123:8848
+        ip: 182.92.106.123
+        port: 8081
+
+  # 数据库连接配置
+  datasource:
+    url: jdbc:mysql://182.92.106.123/rtms?characterEncoding=UTF-8&serverTimezone=GMT%2B8&useSSL=false
+    username: root
+    password: 123456
+    # 数据库连接池配置
+    driver-class-name: com.mysql.jdbc.Driver
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 20
+      max-lifetime: 1800000
+      connection-timeout: 30000
+      auto-commit: true
+      pool-name: basedata_db_pool
+
+  # json 配置
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+
+  # redis配置
+  redis:
+    host: 182.92.106.123
+    port: 6379
+    password: 123456
+
+  # spring缓存配置
+  cache:
+    type: redis
+
+# mybatis配置
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+    # sql输出到控制台
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  mapper-locations:
+    - classpath:mybatis/mapper/*.xml
+
+logging:
+  level:
+    com.lwh147.rtms.backstage: debug
+
+# 分页配置
+pagehelper:
+  helper-dialect: mysql
+
+

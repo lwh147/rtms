@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>resident-temperature-monitoring-system</artifactId>
+        <groupId>com.lwh147</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>resident-temperature-monitoring-system-backstage-service</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>resident-temperature-monitoring-system-backstage-api</module>
+        <module>resident-temperature-monitoring-system-backstage-controller</module>
+        <module>resident-temperature-monitoring-system-backstage-serve</module>
+        <module>resident-temperature-monitoring-system-backstage-dao</module>
+        <module>resident-temperature-monitoring-system-backstage-pojo</module>
+        <module>resident-temperature-monitoring-system-backstage-util</module>
+        <module>resident-temperature-monitoring-system-backstage-config</module>
+    </modules>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+
+        <resident-temperature-monitoring-system-backstage-api.version>1.0-SNAPSHOT
+        </resident-temperature-monitoring-system-backstage-api.version>
+        <resident-temperature-monitoring-system-backstage-controller.version>1.0-SNAPSHOT
+        </resident-temperature-monitoring-system-backstage-controller.version>
+        <resident-temperature-monitoring-system-backstage-dao.version>1.0-SNAPSHOT
+        </resident-temperature-monitoring-system-backstage-dao.version>
+        <resident-temperature-monitoring-system-backstage-pojo.version>1.0-SNAPSHOT
+        </resident-temperature-monitoring-system-backstage-pojo.version>
+        <resident-temperature-monitoring-system-backstage-serve.version>1.0-SNAPSHOT
+        </resident-temperature-monitoring-system-backstage-serve.version>
+        <resident-temperature-monitoring-system-backstage-util.version>1.0-SNAPSHOT
+        </resident-temperature-monitoring-system-backstage-util.version>
+        <resident-temperature-monitoring-system-backstage-config.version>1.0-SNAPSHOT
+        </resident-temperature-monitoring-system-backstage-config.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.lwh147</groupId>
+                <artifactId>resident-temperature-monitoring-system-backstage-api</artifactId>
+                <version>${resident-temperature-monitoring-system-backstage-api.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.lwh147</groupId>
+                <artifactId>resident-temperature-monitoring-system-backstage-controller</artifactId>
+                <version>${resident-temperature-monitoring-system-backstage-controller.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.lwh147</groupId>
+                <artifactId>resident-temperature-monitoring-system-backstage-dao</artifactId>
+                <version>${resident-temperature-monitoring-system-backstage-dao.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.lwh147</groupId>
+                <artifactId>resident-temperature-monitoring-system-backstage-pojo</artifactId>
+                <version>${resident-temperature-monitoring-system-backstage-pojo.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.lwh147</groupId>
+                <artifactId>resident-temperature-monitoring-system-backstage-serve</artifactId>
+                <version>${resident-temperature-monitoring-system-backstage-serve.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.lwh147</groupId>
+                <artifactId>resident-temperature-monitoring-system-backstage-util</artifactId>
+                <version>${resident-temperature-monitoring-system-backstage-util.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.lwh147</groupId>
+                <artifactId>resident-temperature-monitoring-system-backstage-config</artifactId>
+                <version>${resident-temperature-monitoring-system-backstage-config.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <!-- springboot相关 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <!-- aop-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
+
+        <!-- redis -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-cache</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+
+        <!-- 分页 -->
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper-spring-boot-starter</artifactId>
+        </dependency>
+
+        <!-- JSON -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+        </dependency>
+
+        <!-- mysql -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+
+        <!-- tk.mybatis相关 -->
+        <dependency>
+            <groupId>tk.mybatis</groupId>
+            <artifactId>mapper-spring-boot-starter</artifactId>
+        </dependency>
+
+        <!-- swagger -->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-boot-starter</artifactId>
+        </dependency>
+
+        <!-- 工具类 -->
+        <dependency>
+            <groupId>commons-beanutils</groupId>
+            <artifactId>commons-beanutils</artifactId>
+        </dependency>
+    </dependencies>
+
+</project>

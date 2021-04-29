@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <context id="Mysql" targetRuntime="MyBatis3Simple" defaultModelType="flat">
+        <property name="javaFileEncoding" value="UTF-8"/>
+
+        <!-- 通用 Mapper 插件，可以生成带注解的实体类 -->
+        <plugin type="tk.mybatis.mapper.generator.MapperPlugin">
+            <property name="mappers" value="tk.mybatis.mapper.common.Mapper"/>
+            <property name="caseSensitive" value="true"/>
+            <property name="forceAnnotation" value="true"/>
+            <property name="useMapperCommentGenerator" value="true"/>
+            <property name="lombok" value="Data"/>
+            <property name="swagger" value="true"/>
+        </plugin>
+
+        <!-- 为了防止生成的代码中有很多注释，比较难看，加入下面的配置控制  -->
+        <commentGenerator>
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://182.92.106.123/rtms?characterEncoding=UTF-8&amp;serverTimezone=GMT%2B8&amp;useSSL=false"
+                        userId="root"
+                        password="123456">
+        </jdbcConnection>
+
+        <!--MyBatis 生成器只需要生成 Model-->
+        <javaModelGenerator targetPackage="com.lwh147.rtms.backstage.dao.entity"
+                            targetProject="resident-temperature-monitoring-system-backstage-service/resident-temperature-monitoring-system-backstage-dao/src/main/java"/>
+
+        <sqlMapGenerator targetPackage="mapper"
+                         targetProject="resident-temperature-monitoring-system-backstage-service/resident-temperature-monitoring-system-backstage-dao/src/main/resources/mybatis"/>
+
+        <javaClientGenerator targetPackage="com.lwh147.rtms.backstage.dao.mapper"
+                             targetProject="resident-temperature-monitoring-system-backstage-service/resident-temperature-monitoring-system-backstage-dao/src/main/java"
+                             type="XMLMAPPER"/>
+
+        <table tableName="admin" domainObjectName="Admin"/>
+
+        <table tableName="resident" domainObjectName="Resident"/>
+
+        <table tableName="temp_info" domainObjectName="TempInfo"/>
+
+    </context>
+</generatorConfiguration>

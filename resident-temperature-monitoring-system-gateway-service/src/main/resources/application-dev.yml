@@ -1,0 +1,16 @@
+# 服务端口号
+server:
+  port: 9001
+
+spring:
+  application:
+    name: resident-temperature-monitoring-system-gateway-service
+
+  # 配置Nacos地址
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 182.92.106.123:8848
+        ip: 182.92.106.123
+        port: 9001
+
