@@ -14,7 +14,7 @@
         <result column="phone" jdbcType="VARCHAR" property="phone"/>
     </resultMap>
 
-    <!-- admin通用查询动态sql -->
+    <!-- resident通用查询动态sql -->
     <select id="commonQuery" parameterType="com.lwh147.rtms.backstage.pojo.query.ResidentQuery"
             resultMap="BaseResultMap">
         SELECT *

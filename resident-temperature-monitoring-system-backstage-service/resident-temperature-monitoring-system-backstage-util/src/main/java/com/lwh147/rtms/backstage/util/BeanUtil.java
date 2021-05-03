@@ -21,6 +21,10 @@ import java.util.Map;
  **/
 public class BeanUtil {
 
+    private BeanUtil() {
+
+    }
+
     /**
      * 将bean转化为另一种bean实体
      *

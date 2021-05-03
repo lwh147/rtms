@@ -18,7 +18,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-@ApiModel("AdminQuery")
+@ApiModel(description = "AdminQuery")
 public class AdminQuery extends BasicQuery {
     /**
      * 管理员名（姓名）

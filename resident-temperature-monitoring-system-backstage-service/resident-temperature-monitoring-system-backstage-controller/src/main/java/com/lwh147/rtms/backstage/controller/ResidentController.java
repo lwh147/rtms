@@ -2,6 +2,7 @@ package com.lwh147.rtms.backstage.controller;
 
 import cn.hutool.core.bean.BeanException;
 import com.lwh147.rtms.backstage.api.ResidentControllerApi;
+import com.lwh147.rtms.backstage.common.annotation.Page;
 import com.lwh147.rtms.backstage.common.exception.CommonException;
 import com.lwh147.rtms.backstage.controller.exception.code.ControllerExceptionCode;
 import com.lwh147.rtms.backstage.pojo.dto.ResidentDTO;
@@ -69,6 +70,7 @@ public class ResidentController implements ResidentControllerApi {
     }
 
     @Override
+    @Page
     @GetMapping("")
     public List<ResidentVO> commonQuery(ResidentQuery residentQuery) {
         if (residentQuery == null) {

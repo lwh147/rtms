@@ -25,14 +25,14 @@ public class TempInfo {
      * 检测时间
      */
     @Column(name = "time")
-    @ApiModelProperty("检测时间")
+    @ApiModelProperty("检测时间，格式：yyyy-MM-dd HH:mm:ss")
     private Date time;
 
     /**
      * 检测结果，温度摄氏度
      */
     @Column(name = "temp")
-    @ApiModelProperty("检测结果，温度摄氏度")
+    @ApiModelProperty("检测结果，温度摄氏度，只保留一位小数")
     private Float temp;
 
     /**

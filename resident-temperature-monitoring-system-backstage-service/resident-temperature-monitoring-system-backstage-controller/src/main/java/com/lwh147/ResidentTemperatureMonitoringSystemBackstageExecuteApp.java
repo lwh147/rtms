@@ -16,7 +16,6 @@ import tk.mybatis.spring.annotation.MapperScan;
 @EnableOpenApi
 @EnableCaching
 @MapperScan("com.lwh147.rtms.backstage.dao.mapper")
-// @ComponentScan("com.lwh147.rtms.backstage.common")
 public class ResidentTemperatureMonitoringSystemBackstageExecuteApp {
     public static void main(String[] args) {
         SpringApplication.run(ResidentTemperatureMonitoringSystemBackstageExecuteApp.class, args);

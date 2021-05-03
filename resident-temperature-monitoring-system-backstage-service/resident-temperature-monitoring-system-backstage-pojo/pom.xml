@@ -15,6 +15,10 @@
             <groupId>com.lwh147</groupId>
             <artifactId>resident-temperature-monitoring-system-backstage-common</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.lwh147</groupId>
+            <artifactId>resident-temperature-monitoring-system-backstage-util</artifactId>
+        </dependency>
     </dependencies>
 
     <properties>

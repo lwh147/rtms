@@ -49,12 +49,12 @@ public class CommonPage<T> {
         /**
          * 当前页号
          */
-        @ApiModelProperty("当前页号")
+        @ApiModelProperty("当前页号，默认为1")
         private Integer pageNum;
         /**
          * 每页数量
          */
-        @ApiModelProperty("每页数量")
+        @ApiModelProperty("每页数量，默认为10")
         private Integer pageSize;
         /**
          * 总页数

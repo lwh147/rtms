@@ -18,7 +18,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-@ApiModel("ResidentQuery")
+@ApiModel(description = "ResidentQuery")
 public class ResidentQuery extends BasicQuery {
     /**
      * 姓名
