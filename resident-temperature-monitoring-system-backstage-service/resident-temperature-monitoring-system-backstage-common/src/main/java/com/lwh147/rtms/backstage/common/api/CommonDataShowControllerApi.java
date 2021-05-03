@@ -1,4 +1,4 @@
-package com.lwh147.rtms.backstage.api;
+package com.lwh147.rtms.backstage.common.api;
 
 import com.lwh147.rtms.backstage.common.response.CommonPage;
 import com.lwh147.rtms.backstage.common.response.CommonResponse;

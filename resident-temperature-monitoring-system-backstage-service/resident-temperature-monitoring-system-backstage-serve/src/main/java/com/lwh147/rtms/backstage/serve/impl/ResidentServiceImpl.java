@@ -5,11 +5,11 @@ import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageInfo;
 import com.lwh147.rtms.backstage.common.context.BaseContextHolder;
 import com.lwh147.rtms.backstage.common.exception.CommonException;
-import com.lwh147.rtms.backstage.dao.entity.Admin;
-import com.lwh147.rtms.backstage.dao.mapper.AdminMapper;
-import com.lwh147.rtms.backstage.pojo.dto.AdminDTO;
-import com.lwh147.rtms.backstage.pojo.query.AdminQuery;
-import com.lwh147.rtms.backstage.serve.AdminService;
+import com.lwh147.rtms.backstage.dao.entity.Resident;
+import com.lwh147.rtms.backstage.dao.mapper.ResidentMapper;
+import com.lwh147.rtms.backstage.pojo.dto.ResidentDTO;
+import com.lwh147.rtms.backstage.pojo.query.ResidentQuery;
+import com.lwh147.rtms.backstage.serve.ResidentService;
 import com.lwh147.rtms.backstage.serve.exception.code.BusinessExceptionCode;
 import com.lwh147.rtms.backstage.util.BeanUtil;
 import com.lwh147.rtms.backstage.util.IdGenerator;
@@ -19,70 +19,70 @@ import javax.annotation.Resource;
 import java.util.List;
 
 /**
- * @description: 管理员服务接口实现
+ * @description: 居民业务接口实现
  * @author: lwh
- * @create: 2021/4/30 17:09
+ * @create: 2021/5/3 12:22
  * @version: v1.0
  **/
 @Service
-public class AdminServiceImpl implements AdminService {
+public class ResidentServiceImpl implements ResidentService {
     @Resource
-    private AdminMapper adminMapper;
+    private ResidentMapper residentMapper;
     @Resource
     private IdGenerator idGenerator;
 
     @Override
-    public Boolean add(AdminDTO adminDTO) {
-        Admin admin = new Admin();
+    public Boolean add(ResidentDTO residentDTO) {
+        Resident resident = new Resident();
         try {
-            BeanUtil.copy(adminDTO, admin);
+            BeanUtil.copy(residentDTO, resident);
         } catch (BeanException e) {
             throw new CommonException(BusinessExceptionCode.BUSINESS_BEAN_COPY_ERROR.getCode(), e.getMessage());
         }
-        admin.setId(idGenerator.snowflakeId());
-        return adminMapper.insert(admin) > 0;
+        resident.setId(idGenerator.snowflakeId());
+        return residentMapper.insert(resident) > 0;
     }
 
     @Override
     public Boolean delete(Long id) {
-        return adminMapper.deleteByPrimaryKey(id) > 0;
+        return residentMapper.deleteByPrimaryKey(id) > 0;
     }
 
     @Override
-    public AdminDTO queryById(Long id) {
-        Admin admin = adminMapper.selectByPrimaryKey(id);
-        if (admin == null) {
+    public ResidentDTO queryById(Long id) {
+        Resident resident = residentMapper.selectByPrimaryKey(id);
+        if (resident == null) {
             return null;
         }
         try {
-            return BeanUtil.copy(admin, AdminDTO.class);
+            return BeanUtil.copy(resident, ResidentDTO.class);
         } catch (BeanException e) {
             throw new CommonException(BusinessExceptionCode.BUSINESS_BEAN_COPY_ERROR.getCode(), e.getMessage());
         }
     }
 
     @Override
-    public Boolean update(AdminDTO adminDTO) {
-        Admin admin = new Admin();
+    public Boolean update(ResidentDTO residentDTO) {
+        Resident resident = new Resident();
         try {
-            BeanUtil.copy(adminDTO, admin);
+            BeanUtil.copy(residentDTO, resident);
         } catch (BeanException e) {
             throw new CommonException(BusinessExceptionCode.BUSINESS_BEAN_COPY_ERROR.getCode(), e.getMessage());
         }
-        return adminMapper.updateByPrimaryKeySelective(admin) > 0;
+        return residentMapper.updateByPrimaryKeySelective(resident) > 0;
     }
 
     @Override
-    public List<AdminDTO> commonQuery(AdminQuery adminQuery) {
-        List<Admin> admins = adminMapper.commonQuery(adminQuery);
-        if (admins == null) {
+    public List<ResidentDTO> commonQuery(ResidentQuery residentQuery) {
+        List<Resident> residents = residentMapper.commonQuery(residentQuery);
+        if (residents == null) {
             throw new CommonException(BusinessExceptionCode.BUSINESS_QUERY_RESULT_SET_NULL_ERROR);
         }
         // 获取并设置分页信息
-        String pageInfo = JSON.toJSONString(new PageInfo<>(admins));
+        String pageInfo = JSON.toJSONString(new PageInfo<>(residents));
         BaseContextHolder.setPageInfo(pageInfo);
         try {
-            return BeanUtil.copyList(admins, AdminDTO.class);
+            return BeanUtil.copyList(residents, ResidentDTO.class);
         } catch (BeanException e) {
             throw new CommonException(BusinessExceptionCode.BUSINESS_BEAN_COPY_ERROR.getCode(), e.getMessage());
         }

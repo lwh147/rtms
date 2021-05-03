@@ -1,6 +1,6 @@
-package com.lwh147.rtms.backstage.controller;
+package com.lwh147.rtms.backstage.common.controller;
 
-import com.lwh147.rtms.backstage.api.CommonDataShowControllerApi;
+import com.lwh147.rtms.backstage.common.api.CommonDataShowControllerApi;
 import com.lwh147.rtms.backstage.common.response.CommonPage;
 import com.lwh147.rtms.backstage.common.response.CommonResponse;
 import com.lwh147.rtms.backstage.common.response.CommonResponseUtil;

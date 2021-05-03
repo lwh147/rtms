@@ -1,14 +1,13 @@
 package com.lwh147.rtms.backstage.controller;
 
 import cn.hutool.core.bean.BeanException;
-import com.lwh147.rtms.backstage.api.AdminControllerApi;
-import com.lwh147.rtms.backstage.common.annotation.Page;
+import com.lwh147.rtms.backstage.api.ResidentControllerApi;
 import com.lwh147.rtms.backstage.common.exception.CommonException;
 import com.lwh147.rtms.backstage.controller.exception.code.ControllerExceptionCode;
-import com.lwh147.rtms.backstage.pojo.dto.AdminDTO;
-import com.lwh147.rtms.backstage.pojo.query.AdminQuery;
-import com.lwh147.rtms.backstage.pojo.vo.AdminVO;
-import com.lwh147.rtms.backstage.serve.AdminService;
+import com.lwh147.rtms.backstage.pojo.dto.ResidentDTO;
+import com.lwh147.rtms.backstage.pojo.query.ResidentQuery;
+import com.lwh147.rtms.backstage.pojo.vo.ResidentVO;
+import com.lwh147.rtms.backstage.serve.ResidentService;
 import com.lwh147.rtms.backstage.util.BeanUtil;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,31 +15,31 @@ import javax.annotation.Resource;
 import java.util.List;
 
 /**
- * @description: 管理员控制器接口实现
+ * @description: 居民控制器接口实现
  * @author: lwh
- * @create: 2021/4/30 11:25
+ * @create: 2021/5/3 12:16
  * @version: v1.0
  **/
 @RestController
 @CrossOrigin
-@RequestMapping("/admin")
-public class AdminController implements AdminControllerApi {
+@RequestMapping("/resident")
+public class ResidentController implements ResidentControllerApi {
     @Resource
-    private AdminService adminService;
+    private ResidentService residentService;
 
     @Override
     @PostMapping("")
-    public Boolean add(@RequestBody AdminVO adminVO) {
-        if (adminVO == null) {
+    public Boolean add(@RequestBody ResidentVO residentVO) {
+        if (residentVO == null) {
             throw new CommonException(ControllerExceptionCode.CONTROLLER_ARGUMENT_VO_EMPTUY_ERROR);
         }
-        AdminDTO adminDTO = new AdminDTO();
+        ResidentDTO residentDTO = new ResidentDTO();
         try {
-            BeanUtil.copy(adminVO, adminDTO);
+            BeanUtil.copy(residentVO, residentDTO);
         } catch (BeanException e) {
             throw new CommonException(ControllerExceptionCode.CONTROLLER_BEAN_COPY_ERROR.getCode(), e.getMessage());
         }
-        return adminService.add(adminDTO);
+        return residentService.add(residentDTO);
     }
 
     @Override
@@ -49,36 +48,35 @@ public class AdminController implements AdminControllerApi {
         if (id == null) {
             throw new CommonException(ControllerExceptionCode.CONTROLLER_ARGUMENT_ID_EMPTUY_ERROR);
         }
-        return adminService.delete(id);
+        return residentService.delete(id);
     }
 
     @Override
     @GetMapping("/{id}")
-    public AdminVO queryById(@PathVariable("id") Long id) {
+    public ResidentVO queryById(@PathVariable("id") Long id) {
         if (id == null) {
             throw new CommonException(ControllerExceptionCode.CONTROLLER_ARGUMENT_ID_EMPTUY_ERROR);
         }
-        AdminDTO adminDTO = adminService.queryById(id);
-        if (adminDTO == null) {
+        ResidentDTO residentDTO = residentService.queryById(id);
+        if (residentDTO == null) {
             return null;
         }
         try {
-            return BeanUtil.copy(adminDTO, AdminVO.class);
+            return BeanUtil.copy(residentDTO, ResidentVO.class);
         } catch (BeanException e) {
             throw new CommonException(ControllerExceptionCode.CONTROLLER_BEAN_COPY_ERROR.getCode(), e.getMessage());
         }
     }
 
     @Override
-    @Page
     @GetMapping("")
-    public List<AdminVO> commonQuery(AdminQuery adminQuery) {
-        if (adminQuery == null) {
+    public List<ResidentVO> commonQuery(ResidentQuery residentQuery) {
+        if (residentQuery == null) {
             throw new CommonException(ControllerExceptionCode.CONTROLLER_ARGUMENT_QUERY_EMPTY_ERROR);
         }
-        List<AdminDTO> adminDTOS = adminService.commonQuery(adminQuery);
+        List<ResidentDTO> residentDTOS = residentService.commonQuery(residentQuery);
         try {
-            return BeanUtil.copyList(adminDTOS, AdminVO.class);
+            return BeanUtil.copyList(residentDTOS, ResidentVO.class);
         } catch (BeanException e) {
             throw new CommonException(ControllerExceptionCode.CONTROLLER_BEAN_COPY_ERROR.getCode(), e.getMessage());
         }
@@ -86,19 +84,19 @@ public class AdminController implements AdminControllerApi {
 
     @Override
     @PutMapping("")
-    public Boolean update(@RequestBody AdminVO adminVO) {
-        if (adminVO == null) {
+    public Boolean update(@RequestBody ResidentVO residentVO) {
+        if (residentVO == null) {
             throw new CommonException(ControllerExceptionCode.CONTROLLER_ARGUMENT_VO_EMPTUY_ERROR);
         }
-        if (adminVO.getId() == null) {
+        if (residentVO.getId() == null) {
             throw new CommonException(ControllerExceptionCode.CONTROLLER_ARGUMENT_ID_EMPTUY_ERROR);
         }
-        AdminDTO adminDTO = new AdminDTO();
+        ResidentDTO residentDTO = new ResidentDTO();
         try {
-            BeanUtil.copy(adminVO, adminDTO);
+            BeanUtil.copy(residentVO, residentDTO);
         } catch (Exception e) {
-            throw new CommonException(ControllerExceptionCode.CONTROLLER_BEAN_COPY_ERROR);
+            throw new CommonException(ControllerExceptionCode.CONTROLLER_BEAN_COPY_ERROR.getCode(), e.getMessage());
         }
-        return adminService.update(adminDTO);
+        return residentService.update(residentDTO);
     }
 }
