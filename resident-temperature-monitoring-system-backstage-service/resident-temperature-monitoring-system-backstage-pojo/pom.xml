@@ -10,6 +10,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>resident-temperature-monitoring-system-backstage-pojo</artifactId>
+    <dependencies>
+        <dependency>
+            <groupId>com.lwh147</groupId>
+            <artifactId>resident-temperature-monitoring-system-backstage-common</artifactId>
+        </dependency>
+    </dependencies>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

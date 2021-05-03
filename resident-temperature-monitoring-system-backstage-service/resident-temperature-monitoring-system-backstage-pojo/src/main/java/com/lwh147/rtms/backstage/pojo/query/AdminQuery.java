@@ -1,57 +1,52 @@
-package com.lwh147.rtms.backstage.dao.entity;
+package com.lwh147.rtms.backstage.pojo.query;
 
+import com.lwh147.rtms.backstage.common.pojo.query.BasicQuery;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
+/**
+ * @description: 管理员查询条件封装类
+ * @author: lwh
+ * @create: 2021/5/2 17:49
+ * @version: v1.0
+ **/
 @Data
-@ApiModel(description = "Admin")
-@Table(name = "admin")
-public class Admin {
-    /**
-     * 主键
-     */
-    @Id
-    @Column(name = "id")
-    @ApiModelProperty("主键")
-    private Long id;
-
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(callSuper = true)
+@ApiModel("AdminQuery")
+public class AdminQuery extends BasicQuery {
     /**
      * 管理员名（姓名）
      */
-    @Column(name = "name")
     @ApiModelProperty("管理员名（姓名）")
     private String name;
 
     /**
      * 账号（10位，字母、数字或者下划线、点）
      */
-    @Column(name = "account")
     @ApiModelProperty("账号（10位，字母、数字或者下划线、点）")
     private String account;
 
     /**
      * MD5加密后的密码（6位纯数字）
      */
-    @Column(name = "password")
     @ApiModelProperty("MD5加密后的密码（6位纯数字）")
     private String password;
 
     /**
      * 联系电话（手机号）
      */
-    @Column(name = "phone")
     @ApiModelProperty("联系电话（手机号）")
     private String phone;
 
     /**
      * 手机客户端管理员还是后台管理员（0：后台，1：客户端）
      */
-    @Column(name = "type")
     @ApiModelProperty("手机客户端管理员还是后台管理员（0：后台，1：客户端）")
     private Byte type;
 }

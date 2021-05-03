@@ -18,7 +18,7 @@
         <module>resident-temperature-monitoring-system-backstage-dao</module>
         <module>resident-temperature-monitoring-system-backstage-pojo</module>
         <module>resident-temperature-monitoring-system-backstage-util</module>
-        <module>resident-temperature-monitoring-system-backstage-config</module>
+        <module>resident-temperature-monitoring-system-backstage-common</module>
     </modules>
 
     <properties>
@@ -40,8 +40,8 @@
         </resident-temperature-monitoring-system-backstage-serve.version>
         <resident-temperature-monitoring-system-backstage-util.version>1.0-SNAPSHOT
         </resident-temperature-monitoring-system-backstage-util.version>
-        <resident-temperature-monitoring-system-backstage-config.version>1.0-SNAPSHOT
-        </resident-temperature-monitoring-system-backstage-config.version>
+        <resident-temperature-monitoring-system-backstage-common.version>1.0-SNAPSHOT
+        </resident-temperature-monitoring-system-backstage-common.version>
     </properties>
 
     <dependencyManagement>
@@ -78,8 +78,8 @@
             </dependency>
             <dependency>
                 <groupId>com.lwh147</groupId>
-                <artifactId>resident-temperature-monitoring-system-backstage-config</artifactId>
-                <version>${resident-temperature-monitoring-system-backstage-config.version}</version>
+                <artifactId>resident-temperature-monitoring-system-backstage-common</artifactId>
+                <version>${resident-temperature-monitoring-system-backstage-common.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

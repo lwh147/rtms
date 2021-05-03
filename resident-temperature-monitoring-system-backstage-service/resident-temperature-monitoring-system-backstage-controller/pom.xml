@@ -26,7 +26,11 @@
         </dependency>
         <dependency>
             <groupId>com.lwh147</groupId>
-            <artifactId>resident-temperature-monitoring-system-backstage-config</artifactId>
+            <artifactId>resident-temperature-monitoring-system-backstage-serve</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.lwh147</groupId>
+            <artifactId>resident-temperature-monitoring-system-backstage-common</artifactId>
         </dependency>
     </dependencies>
 

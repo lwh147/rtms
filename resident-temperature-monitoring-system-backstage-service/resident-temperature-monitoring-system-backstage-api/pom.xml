@@ -19,4 +19,15 @@
         <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.lwh147</groupId>
+            <artifactId>resident-temperature-monitoring-system-backstage-pojo</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.lwh147</groupId>
+            <artifactId>resident-temperature-monitoring-system-backstage-common</artifactId>
+        </dependency>
+    </dependencies>
+
 </project>

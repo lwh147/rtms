@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>resident-temperature-monitoring-system-backstage-serve</artifactId>
+    <artifactId>resident-temperature-monitoring-system-backstage-common</artifactId>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -18,24 +18,5 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
-
-    <dependencies>
-        <dependency>
-            <groupId>com.lwh147</groupId>
-            <artifactId>resident-temperature-monitoring-system-backstage-pojo</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.lwh147</groupId>
-            <artifactId>resident-temperature-monitoring-system-backstage-dao</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.lwh147</groupId>
-            <artifactId>resident-temperature-monitoring-system-backstage-util</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.lwh147</groupId>
-            <artifactId>resident-temperature-monitoring-system-backstage-common</artifactId>
-        </dependency>
-    </dependencies>
 
 </project>

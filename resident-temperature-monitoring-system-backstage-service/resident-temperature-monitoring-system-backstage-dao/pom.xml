@@ -20,6 +20,11 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>com.lwh147</groupId>
+            <artifactId>resident-temperature-monitoring-system-backstage-pojo</artifactId>
+        </dependency>
+
         <!-- mybatis逆向依赖 -->
         <dependency>
             <groupId>org.mybatis.generator</groupId>
