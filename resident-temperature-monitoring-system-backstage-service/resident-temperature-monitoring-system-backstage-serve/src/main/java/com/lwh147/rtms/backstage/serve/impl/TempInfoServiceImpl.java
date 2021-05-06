@@ -40,7 +40,7 @@ public class TempInfoServiceImpl implements TempInfoService {
             throw new CommonException(BusinessExceptionCode.BUSINESS_BEAN_COPY_ERROR.getCode(), e.getMessage());
         }
         tempInfo.setId(idGenerator.snowflakeId());
-        return tempInfoMapper.insert(tempInfo) > 0;
+        return tempInfoMapper.selectedInsert(tempInfo) > 0;
     }
 
     @Override

@@ -28,10 +28,8 @@ public class LoginFormVO {
      **/
     @ApiModelProperty("MD5加密后的密码（6位纯数字）")
     private String password;
-
-    /**
-     * 管理员类型
-     **/
-    @ApiModelProperty("手机客户端管理员还是后台管理员（0：后台，1：客户端）")
-    private Byte type;
 }
+
+
+
+

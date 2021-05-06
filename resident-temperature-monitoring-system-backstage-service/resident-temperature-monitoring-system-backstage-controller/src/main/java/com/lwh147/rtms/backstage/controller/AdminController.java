@@ -8,6 +8,7 @@ import com.lwh147.rtms.backstage.controller.exception.code.ControllerExceptionCo
 import com.lwh147.rtms.backstage.pojo.dto.AdminDTO;
 import com.lwh147.rtms.backstage.pojo.query.AdminQuery;
 import com.lwh147.rtms.backstage.pojo.vo.AdminVO;
+import com.lwh147.rtms.backstage.pojo.vo.LoginFormVO;
 import com.lwh147.rtms.backstage.serve.AdminService;
 import com.lwh147.rtms.backstage.util.BeanUtil;
 import org.springframework.web.bind.annotation.*;
@@ -32,7 +33,7 @@ public class AdminController implements AdminControllerApi {
     @PostMapping("")
     public Boolean add(@RequestBody AdminVO adminVO) {
         if (adminVO == null) {
-            throw new CommonException(ControllerExceptionCode.CONTROLLER_ARGUMENT_VO_EMPTUY_ERROR);
+            throw new CommonException(ControllerExceptionCode.CONTROLLER_ARGUMENT_VO_EMPTY_ERROR);
         }
         AdminDTO adminDTO = new AdminDTO();
         try {
@@ -47,7 +48,7 @@ public class AdminController implements AdminControllerApi {
     @DeleteMapping("")
     public Boolean delete(@RequestParam("id") Long id) {
         if (id == null) {
-            throw new CommonException(ControllerExceptionCode.CONTROLLER_ARGUMENT_ID_EMPTUY_ERROR);
+            throw new CommonException(ControllerExceptionCode.CONTROLLER_ARGUMENT_ID_EMPTY_ERROR);
         }
         return adminService.delete(id);
     }
@@ -56,7 +57,7 @@ public class AdminController implements AdminControllerApi {
     @GetMapping("/{id}")
     public AdminVO queryById(@PathVariable("id") Long id) {
         if (id == null) {
-            throw new CommonException(ControllerExceptionCode.CONTROLLER_ARGUMENT_ID_EMPTUY_ERROR);
+            throw new CommonException(ControllerExceptionCode.CONTROLLER_ARGUMENT_ID_EMPTY_ERROR);
         }
         AdminDTO adminDTO = adminService.queryById(id);
         if (adminDTO == null) {
@@ -88,10 +89,10 @@ public class AdminController implements AdminControllerApi {
     @PutMapping("")
     public Boolean update(@RequestBody AdminVO adminVO) {
         if (adminVO == null) {
-            throw new CommonException(ControllerExceptionCode.CONTROLLER_ARGUMENT_VO_EMPTUY_ERROR);
+            throw new CommonException(ControllerExceptionCode.CONTROLLER_ARGUMENT_VO_EMPTY_ERROR);
         }
         if (adminVO.getId() == null) {
-            throw new CommonException(ControllerExceptionCode.CONTROLLER_ARGUMENT_ID_EMPTUY_ERROR);
+            throw new CommonException(ControllerExceptionCode.CONTROLLER_ARGUMENT_ID_EMPTY_ERROR);
         }
         AdminDTO adminDTO = new AdminDTO();
         try {
@@ -100,5 +101,18 @@ public class AdminController implements AdminControllerApi {
             throw new CommonException(ControllerExceptionCode.CONTROLLER_BEAN_COPY_ERROR);
         }
         return adminService.update(adminDTO);
+    }
+
+    @Override
+    @PostMapping("loginFromApp")
+    public AdminVO loginFromApp(@RequestBody LoginFormVO loginFormVO) {
+        if (loginFormVO.getAccount() != null && loginFormVO.getPassword() != null) {
+            AdminDTO adminDTO = adminService.loginFromApp(BeanUtil.copy(loginFormVO, AdminQuery.class));
+            if (adminDTO == null) {
+                throw new CommonException(ControllerExceptionCode.CONTROLLER_LOGIN_FAIL);
+            }
+            return BeanUtil.copy(adminDTO, AdminVO.class);
+        }
+        throw new CommonException(ControllerExceptionCode.CONTROLLER_LOGIN_ARGUMENT_EMPTY_ERROR);
     }
 }

@@ -22,7 +22,7 @@ public class TempInfoDTO {
     /**
      * 检测时间
      */
-    @ApiModelProperty("检测时间，格式：yyyy-MM-dd HH:mm:ss")
+    @ApiModelProperty("检测时间，格式：yyyy/MM/dd HH:mm:ss")
     private Date time;
 
     /**
@@ -36,4 +36,10 @@ public class TempInfoDTO {
      */
     @ApiModelProperty("外键")
     private Long residentId;
+
+    /**
+     * 居民姓名
+     */
+    @ApiModelProperty("居民姓名")
+    private String residentName;
 }

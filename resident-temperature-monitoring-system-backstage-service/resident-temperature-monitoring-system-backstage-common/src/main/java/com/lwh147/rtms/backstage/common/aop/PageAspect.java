@@ -46,7 +46,7 @@ public class PageAspect {
             // 返回正常执行结果，在统一应答advice中处理
             return proceedingJoinPoint.proceed();
         } catch (Throwable throwable) {
-            throw new CommonException(CommonExceptionCodeImpl.COMMON_PAGE_AOP_ERROR);
+            throw new CommonException(CommonExceptionCodeImpl.COMMON_PAGE_AOP_ERROR.getCode(), throwable.getMessage());
         }
     }
 

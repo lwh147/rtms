@@ -14,10 +14,16 @@ public enum ControllerExceptionCode implements CommonExceptionCode {
     /**
      * 编号从2000开始到2999，2000保留
      **/
-    CONTROLLER_ARGUMENT_VO_EMPTUY_ERROR(2001, "VO对象为空"),
-    CONTROLLER_ARGUMENT_ID_EMPTUY_ERROR(2002, "id为空"),
+    CONTROLLER_ARGUMENT_VO_EMPTY_ERROR(2001, "VO对象为空"),
+    CONTROLLER_ARGUMENT_ID_EMPTY_ERROR(2002, "id为空"),
     CONTROLLER_BEAN_COPY_ERROR(2003, "VO与DTO转换出错"),
     CONTROLLER_ARGUMENT_QUERY_EMPTY_ERROR(2004, "query对象为空"),
+    CONTROLLER_ARGUMENT_VO_PROPERTY_LOSE_ERROR(2005, "要添加的对象的必需字段存在缺失"),
+    /**
+     * 登陆相关
+     **/
+    CONTROLLER_LOGIN_ARGUMENT_EMPTY_ERROR(2005, "登录请求参数为空"),
+    CONTROLLER_LOGIN_FAIL(2007, "用户名或密码错误"),
 
     ;
 

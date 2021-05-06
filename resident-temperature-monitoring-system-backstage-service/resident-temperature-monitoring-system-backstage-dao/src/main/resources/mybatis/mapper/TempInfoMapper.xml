@@ -9,20 +9,22 @@
         <result column="time" jdbcType="TIMESTAMP" property="time"/>
         <result column="temp" jdbcType="REAL" property="temp"/>
         <result column="resident_id" jdbcType="BIGINT" property="residentId"/>
+        <result column="resident_name" jdbcType="VARCHAR" property="residentName"/>
     </resultMap>
 
     <!-- tempinfo通用查询动态sql -->
     <select id="commonQuery" parameterType="com.lwh147.rtms.backstage.pojo.query.TempInfoQuery"
             resultMap="BaseResultMap">
-        SELECT *
+        SELECT ti.id, time, temp, resident_id, r.name AS resident_name
         FROM `temp_info` ti
+        LEFT JOIN resident r ON ti.resident_id = r.id
         <where>
             <if test="id != null and id != ''">
                 AND ti.resident_id = #{id}
             </if>
             <!-- 指定了具体日期时间区间进行查询 -->
             <if test="startTime != null and endTime != null">
-                AND ti.time BETWEEN TIMESTAMP(#{startTime}) AND TIMESTAMP(#{endTime})
+                AND ti.time BETWEEN #{startTime} AND #{endTime}
             </if>
             <!-- 只指定了具体的开始时间，可以理解为过去某一天至今的查询条件 -->
             <if test="startTime != null and endTime == null">
@@ -31,4 +33,10 @@
         </where>
         ORDER BY ti.time DESC
     </select>
+
+    <!-- 因为实体类并不是表的完全映射，需要自己实现insert -->
+    <insert id="selectedInsert" parameterType="com.lwh147.rtms.backstage.dao.entity.TempInfo">
+        INSERT INTO temp_info
+        VALUES (#{id}, #{time}, #{temp}, #{residentId})
+    </insert>
 </mapper>

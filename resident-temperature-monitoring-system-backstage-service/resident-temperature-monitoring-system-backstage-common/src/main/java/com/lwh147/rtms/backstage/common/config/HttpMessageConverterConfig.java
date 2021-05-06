@@ -22,7 +22,7 @@ import java.util.TimeZone;
  **/
 @Configuration
 public class HttpMessageConverterConfig implements WebMvcConfigurer {
-    @Value("${spring.jackson.date-format: yyyy-MM-dd HH:mm:ss}")
+    @Value("${spring.jackson.date-format: yyyy/MM/dd HH:mm:ss}")
     private String dateFormat;
     @Value("${spring.jackson.time-zone: GMT+8}")
     private String timeZone;

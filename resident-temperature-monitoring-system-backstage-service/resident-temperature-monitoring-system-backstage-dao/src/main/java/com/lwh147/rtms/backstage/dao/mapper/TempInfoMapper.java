@@ -14,4 +14,12 @@ public interface TempInfoMapper extends Mapper<TempInfo> {
      * @return java.util.List<com.lwh147.rtms.backstage.dao.entity.TempInfo>
      **/
     List<TempInfo> commonQuery(TempInfoQuery tempInfoQuery);
+
+    /**
+     * tempInfo插入
+     *
+     * @param tempInfo 要插入的实体
+     * @return java.util.List<com.lwh147.rtms.backstage.dao.entity.TempInfo>
+     **/
+    int selectedInsert(TempInfo tempInfo);
 }

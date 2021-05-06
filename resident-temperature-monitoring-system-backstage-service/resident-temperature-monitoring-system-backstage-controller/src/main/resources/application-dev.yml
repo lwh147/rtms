@@ -32,7 +32,7 @@ spring:
 
   # json 配置
   jackson:
-    date-format: yyyy-MM-dd HH:mm:ss
+    date-format: yyyy/MM/dd HH:mm:ss
     time-zone: GMT+8
 
   # redis配置

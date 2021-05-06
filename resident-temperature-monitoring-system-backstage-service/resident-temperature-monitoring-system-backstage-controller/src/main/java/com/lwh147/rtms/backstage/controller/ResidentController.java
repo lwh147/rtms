@@ -32,7 +32,7 @@ public class ResidentController implements ResidentControllerApi {
     @PostMapping("")
     public Boolean add(@RequestBody ResidentVO residentVO) {
         if (residentVO == null) {
-            throw new CommonException(ControllerExceptionCode.CONTROLLER_ARGUMENT_VO_EMPTUY_ERROR);
+            throw new CommonException(ControllerExceptionCode.CONTROLLER_ARGUMENT_VO_EMPTY_ERROR);
         }
         ResidentDTO residentDTO = new ResidentDTO();
         try {
@@ -47,7 +47,7 @@ public class ResidentController implements ResidentControllerApi {
     @DeleteMapping("")
     public Boolean delete(@RequestParam("id") Long id) {
         if (id == null) {
-            throw new CommonException(ControllerExceptionCode.CONTROLLER_ARGUMENT_ID_EMPTUY_ERROR);
+            throw new CommonException(ControllerExceptionCode.CONTROLLER_ARGUMENT_ID_EMPTY_ERROR);
         }
         return residentService.delete(id);
     }
@@ -56,7 +56,7 @@ public class ResidentController implements ResidentControllerApi {
     @GetMapping("/{id}")
     public ResidentVO queryById(@PathVariable("id") Long id) {
         if (id == null) {
-            throw new CommonException(ControllerExceptionCode.CONTROLLER_ARGUMENT_ID_EMPTUY_ERROR);
+            throw new CommonException(ControllerExceptionCode.CONTROLLER_ARGUMENT_ID_EMPTY_ERROR);
         }
         ResidentDTO residentDTO = residentService.queryById(id);
         if (residentDTO == null) {
@@ -88,10 +88,10 @@ public class ResidentController implements ResidentControllerApi {
     @PutMapping("")
     public Boolean update(@RequestBody ResidentVO residentVO) {
         if (residentVO == null) {
-            throw new CommonException(ControllerExceptionCode.CONTROLLER_ARGUMENT_VO_EMPTUY_ERROR);
+            throw new CommonException(ControllerExceptionCode.CONTROLLER_ARGUMENT_VO_EMPTY_ERROR);
         }
         if (residentVO.getId() == null) {
-            throw new CommonException(ControllerExceptionCode.CONTROLLER_ARGUMENT_ID_EMPTUY_ERROR);
+            throw new CommonException(ControllerExceptionCode.CONTROLLER_ARGUMENT_ID_EMPTY_ERROR);
         }
         ResidentDTO residentDTO = new ResidentDTO();
         try {

@@ -36,4 +36,9 @@ public interface AdminService {
      * 查询管理员
      **/
     List<AdminDTO> commonQuery(AdminQuery adminQuery);
+
+    /**
+     * 登录
+     **/
+    AdminDTO loginFromApp(AdminQuery adminQuery);
 }

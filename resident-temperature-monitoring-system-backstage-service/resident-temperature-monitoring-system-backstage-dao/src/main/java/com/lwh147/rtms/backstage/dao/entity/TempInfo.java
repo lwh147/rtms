@@ -25,7 +25,7 @@ public class TempInfo {
      * 检测时间
      */
     @Column(name = "time")
-    @ApiModelProperty("检测时间，格式：yyyy-MM-dd HH:mm:ss")
+    @ApiModelProperty("检测时间，格式：yyyy/MM/dd HH:mm:ss")
     private Date time;
 
     /**
@@ -41,4 +41,10 @@ public class TempInfo {
     @Column(name = "resident_id")
     @ApiModelProperty("外键")
     private Long residentId;
+
+    /**
+     * 居民姓名
+     */
+    @ApiModelProperty("居民姓名")
+    private String residentName;
 }

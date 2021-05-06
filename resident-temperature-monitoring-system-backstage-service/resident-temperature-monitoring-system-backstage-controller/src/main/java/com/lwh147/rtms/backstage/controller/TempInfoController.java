@@ -32,9 +32,12 @@ public class TempInfoController implements TempInfoControllerApi {
 
     @Override
     @PostMapping("")
-    public Boolean add(TempInfoVO tempInfoVO) {
+    public Boolean add(@RequestBody TempInfoVO tempInfoVO) {
         if (tempInfoVO == null) {
-            throw new CommonException(ControllerExceptionCode.CONTROLLER_ARGUMENT_VO_EMPTUY_ERROR);
+            throw new CommonException(ControllerExceptionCode.CONTROLLER_ARGUMENT_VO_EMPTY_ERROR);
+        }
+        if (tempInfoVO.getTemp() == null || tempInfoVO.getTime() == null || tempInfoVO.getResidentId() == null) {
+            throw new CommonException(ControllerExceptionCode.CONTROLLER_ARGUMENT_VO_PROPERTY_LOSE_ERROR);
         }
         TempInfoDTO tempInfoDTO = new TempInfoDTO();
         try {
@@ -42,7 +45,7 @@ public class TempInfoController implements TempInfoControllerApi {
         } catch (BeanException e) {
             throw new CommonException(ControllerExceptionCode.CONTROLLER_BEAN_COPY_ERROR.getCode(), e.getMessage());
         }
-        return null;
+        return tempInfoService.add(tempInfoDTO);
     }
 
     @Override

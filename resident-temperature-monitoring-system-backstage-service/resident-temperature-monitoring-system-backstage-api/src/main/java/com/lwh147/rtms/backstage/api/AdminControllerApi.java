@@ -2,6 +2,7 @@ package com.lwh147.rtms.backstage.api;
 
 import com.lwh147.rtms.backstage.pojo.query.AdminQuery;
 import com.lwh147.rtms.backstage.pojo.vo.AdminVO;
+import com.lwh147.rtms.backstage.pojo.vo.LoginFormVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -46,6 +47,9 @@ public interface AdminControllerApi {
     @ApiOperation(value = "更改管理员信息")
     Boolean update(@ApiParam(required = true) AdminVO adminVO);
 
-    // @ApiOperation(value = "登录验证")
-    // Boolean login(@ApiParam(required = true) LoginFormVO loginFormVO);
+    /**
+     * 登陆验证
+     **/
+    @ApiOperation(value = "客户端管理员登录验证")
+    AdminVO loginFromApp(@ApiParam(required = true) LoginFormVO loginFormVO);
 }

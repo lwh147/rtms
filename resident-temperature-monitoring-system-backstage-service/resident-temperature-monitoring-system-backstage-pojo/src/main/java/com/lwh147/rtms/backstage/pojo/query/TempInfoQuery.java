@@ -38,12 +38,12 @@ public class TempInfoQuery extends BasicQuery {
     /**
      * 查询时间区段，开始时间
      **/
-    @ApiModelProperty("查询时间区段，开始时间，格式：yyyy-MM-dd HH:mm:ss")
+    @ApiModelProperty("查询时间区段，开始时间，格式：yyyy/MM/dd HH:mm:ss")
     private Date startTime;
 
     /**
      * 查询时间区段，结束时间
      **/
-    @ApiModelProperty("查询时间区段，结束时间，格式：yyyy-MM-dd HH:mm:ss")
+    @ApiModelProperty("查询时间区段，结束时间，格式：yyyy/MM/dd HH:mm:ss")
     private Date endTime;
 }

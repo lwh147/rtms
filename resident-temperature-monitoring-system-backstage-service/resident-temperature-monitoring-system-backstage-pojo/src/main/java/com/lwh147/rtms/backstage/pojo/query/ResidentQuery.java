@@ -48,7 +48,7 @@ public class ResidentQuery extends BasicQuery {
      * 房间号
      */
     @ApiModelProperty("房间号")
-    private Byte room;
+    private Integer room;
 
     /**
      * 联系电话

@@ -10,7 +10,7 @@
         <result column="sex" jdbcType="TINYINT" property="sex"/>
         <result column="building" jdbcType="TINYINT" property="building"/>
         <result column="entrance" jdbcType="TINYINT" property="entrance"/>
-        <result column="room" jdbcType="TINYINT" property="room"/>
+        <result column="room" jdbcType="INTEGER" property="room"/>
         <result column="phone" jdbcType="VARCHAR" property="phone"/>
     </resultMap>
 
