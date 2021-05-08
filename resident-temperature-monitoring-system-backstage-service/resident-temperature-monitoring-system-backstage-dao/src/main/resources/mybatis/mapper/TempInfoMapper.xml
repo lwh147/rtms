@@ -34,9 +34,85 @@
         ORDER BY ti.time DESC
     </select>
 
+    <select id="getTotal" parameterType="com.lwh147.rtms.backstage.pojo.query.TempInfoQuery"
+            resultType="java.lang.Integer">
+        SELECT COUNT(*)
+        FROM temp_info ti
+        <where>
+            AND DATEDIFF(NOW(), ti.time) &lt;= 15
+            <!-- 是否添加体温异常判断 -->
+            <if test="normal != null and normal == false">
+                AND ti.temp > 37.0
+            </if>
+        </where>
+    </select>
+
+    <!-- 获取图表数据的查询 -->
+    <select id="getTemp" parameterType="com.lwh147.rtms.backstage.pojo.query.TempInfoQuery"
+            resultType="java.util.HashMap">
+        <if test="days != null and normal != null">
+            <choose>
+                <when test="days == 1">
+                    SELECT DATE_FORMAT(ti.time, '%H') as duration, count(ti.id) as num
+                    FROM temp_info ti
+                </when>
+                <when test="days == 3">
+                    SELECT DATE_FORMAT(ti.time, '%m-%d %H') as duration, count(ti.id) as num
+                    FROM temp_info ti
+                </when>
+                <when test="days == 7">
+                    SELECT DATE_FORMAT(ti.time, '%m-%d %p') as duration, count(ti.id) as num
+                    FROM temp_info ti
+                </when>
+                <when test="days == 15">
+                    SELECT DATE_FORMAT(ti.time, '%m-%d') as duration, count(id) as num
+                    FROM temp_info ti
+                </when>
+            </choose>
+            <where>
+                AND DATEDIFF(NOW(), ti.time) &lt;= #{days}
+                <if test="normal == false">
+                    AND ti.temp > 37.0
+                </if>
+            </where>
+            GROUP BY duration DESC
+        </if>
+    </select>
+
+    <!-- 某个人的体温数据 -->
+    <select id="getTempByResidentId" parameterType="com.lwh147.rtms.backstage.pojo.query.TempInfoQuery"
+            resultType="java.util.HashMap">
+        SELECT DATE_FORMAT(ti.time, '%m-%d %H:%m') as duration, temp
+        FROM `temp_info` ti
+        <where>
+            <if test="id != null and id != ''">
+                AND ti.resident_id = #{id}
+            </if>
+            <!-- 只指定了具体的开始时间，可以理解为过去某一天至今的查询条件 -->
+            <if test="days != null">
+                AND DATEDIFF(NOW(), ti.time) &lt;= #{days}
+            </if>
+            <!-- 指定了具体日期时间区间进行查询 -->
+            <if test="startTime != null and endTime != null">
+                AND ti.time BETWEEN #{startTime} AND #{endTime}
+            </if>
+        </where>
+        ORDER BY ti.time DESC
+    </select>
+
+    <!-- 所有的15天体温数据 -->
+    <select id="getTempOf15" resultType="java.util.HashMap">
+        SELECT ti.time, ti.temp, r.name AS residentName
+        FROM `temp_info` ti
+                 LEFT JOIN resident r ON ti.resident_id = r.id
+        WHERE DATEDIFF(NOW(), ti.time) &lt;= 15
+        ORDER BY ti.time DESC
+    </select>
+
     <!-- 因为实体类并不是表的完全映射，需要自己实现insert -->
     <insert id="selectedInsert" parameterType="com.lwh147.rtms.backstage.dao.entity.TempInfo">
         INSERT INTO temp_info
         VALUES (#{id}, #{time}, #{temp}, #{residentId})
     </insert>
+
 </mapper>

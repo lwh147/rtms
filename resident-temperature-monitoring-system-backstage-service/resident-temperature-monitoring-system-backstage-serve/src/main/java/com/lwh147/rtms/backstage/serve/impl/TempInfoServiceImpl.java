@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @description: 体温信息业务接口实现
@@ -57,5 +58,25 @@ public class TempInfoServiceImpl implements TempInfoService {
         } catch (BeanException e) {
             throw new CommonException(BusinessExceptionCode.BUSINESS_BEAN_COPY_ERROR.getCode(), e.getMessage());
         }
+    }
+
+    @Override
+    public Integer getTotal(TempInfoQuery tempInfoQuery) {
+        return tempInfoMapper.getTotal(tempInfoQuery);
+    }
+
+    @Override
+    public List<Map<String, Object>> getTemp(TempInfoQuery tempInfoQuery) {
+        return tempInfoMapper.getTemp(tempInfoQuery);
+    }
+
+    @Override
+    public List<Map<String, Object>> getTempByResidentId(TempInfoQuery tempInfoQuery) {
+        return tempInfoMapper.getTempByResidentId(tempInfoQuery);
+    }
+
+    @Override
+    public List<Map<String, Object>> getTempOf15() {
+        return tempInfoMapper.getTempOf15();
     }
 }

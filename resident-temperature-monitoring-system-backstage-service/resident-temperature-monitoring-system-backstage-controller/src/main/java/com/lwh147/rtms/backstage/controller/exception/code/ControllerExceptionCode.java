@@ -19,6 +19,8 @@ public enum ControllerExceptionCode implements CommonExceptionCode {
     CONTROLLER_BEAN_COPY_ERROR(2003, "VO与DTO转换出错"),
     CONTROLLER_ARGUMENT_QUERY_EMPTY_ERROR(2004, "query对象为空"),
     CONTROLLER_ARGUMENT_VO_PROPERTY_LOSE_ERROR(2005, "要添加的对象的必需字段存在缺失"),
+    CONTROLLER_ARGUMENT_LOSE_ERROR(2006, "请求参数丢失"),
+    CONTROLLER_ARGUMENT_NOT_VALID_ERROR(2007, "请求参数非法"),
     /**
      * 登陆相关
      **/

@@ -7,6 +7,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @description: 体温信息控制器接口
@@ -28,4 +29,27 @@ public interface TempInfoControllerApi {
     @ApiOperation(value = "根据综合查询条件查询体温信息")
     List<TempInfoVO> commonQuery(@ApiParam(required = true) TempInfoQuery tempInfoQuery);
 
+    /**
+     * 获取检测的总人次，或者体温异常的总人次
+     **/
+    @ApiOperation(value = "查询15天内的检测总人数，以normal为查询条件")
+    Integer total(@ApiParam(required = true) TempInfoQuery tempInfoQuery);
+
+    /**
+     * 获取表格数据，根据时间和是否是异常体温
+     **/
+    @ApiOperation(value = "获取表格数据，根据时间和是否是异常体温")
+    List<Map<String, Object>> charData(@ApiParam(required = true) TempInfoQuery tempInfoQuery);
+
+    /**
+     * 获取某个人的体温数据
+     **/
+    @ApiOperation(value = "获取某个人最近几天的体温数据")
+    List<Map<String, Object>> getTempByResidentId(@ApiParam(required = true) TempInfoQuery tempInfoQuery);
+
+    /**
+     * 获取15天内所有记录
+     **/
+    @ApiOperation(value = "获取15天内所有记录")
+    List<Map<String, Object>> getTempOf15();
 }

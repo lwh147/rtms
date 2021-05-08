@@ -31,8 +31,9 @@ public class TempInfoQuery extends BasicQuery {
     /**
      * 查询范围为最近几天的数据，3代表最近三天内的，默认为3，与查询时间区段条件冲突，
      * 同时只能设置一种，以查询时间区段优先
+     * 作为图标查询条件时只能取值1、3、7、15
      **/
-    @ApiModelProperty("查询范围为最近几天的数据，3代表最近三天内的，与查询时间区段条件冲突，同时只能设置一种，以查询时间区段优先")
+    @ApiModelProperty("查询范围为最近几天的数据，3代表最近三天内的，与查询时间区段条件冲突，同时只能设置一种，以查询时间区段优先，作为图标查询条件时只能取值1、3、7、15")
     private Integer days = 3;
 
     /**
@@ -46,4 +47,10 @@ public class TempInfoQuery extends BasicQuery {
      **/
     @ApiModelProperty("查询时间区段，结束时间，格式：yyyy/MM/dd HH:mm:ss")
     private Date endTime;
+
+    /**
+     * 查询的是总数据还是体温异常数据
+     **/
+    @ApiModelProperty("查询的是总数据还是体温异常数据 fasle异常，true总")
+    private Boolean normal;
 }
