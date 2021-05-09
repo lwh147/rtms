@@ -90,6 +90,7 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public AdminDTO loginFromApp(AdminQuery adminQuery) {
+        adminQuery.setType((byte) 1);
         List<Admin> admins = adminMapper.commonQuery(adminQuery);
         if (admins.isEmpty()) {
             return null;
