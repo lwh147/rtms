@@ -103,6 +103,7 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public AdminDTO loginFromBackstage(AdminQuery adminQuery) {
+        adminQuery.setType((byte) 0);
         List<Admin> admins = adminMapper.commonQuery(adminQuery);
         if (admins.isEmpty()) {
             return null;
