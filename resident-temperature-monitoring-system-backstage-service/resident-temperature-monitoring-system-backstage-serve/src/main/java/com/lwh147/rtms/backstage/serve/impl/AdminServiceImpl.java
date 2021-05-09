@@ -100,4 +100,17 @@ public class AdminServiceImpl implements AdminService {
             throw new CommonException(BusinessExceptionCode.BUSINESS_BEAN_COPY_ERROR.getCode(), e.getMessage());
         }
     }
+
+    @Override
+    public AdminDTO loginFromBackstage(AdminQuery adminQuery) {
+        List<Admin> admins = adminMapper.commonQuery(adminQuery);
+        if (admins.isEmpty()) {
+            return null;
+        }
+        try {
+            return BeanUtil.copy(admins.get(0), AdminDTO.class);
+        } catch (BeanException e) {
+            throw new CommonException(BusinessExceptionCode.BUSINESS_BEAN_COPY_ERROR.getCode(), e.getMessage());
+        }
+    }
 }

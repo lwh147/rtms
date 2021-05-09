@@ -24,8 +24,10 @@ public enum ControllerExceptionCode implements CommonExceptionCode {
     /**
      * 登陆相关
      **/
-    CONTROLLER_LOGIN_ARGUMENT_EMPTY_ERROR(2005, "登录请求参数为空"),
-    CONTROLLER_LOGIN_FAIL(2007, "用户名或密码错误"),
+    CONTROLLER_LOGIN_ARGUMENT_EMPTY_ERROR(2500, "登录请求参数为空"),
+    CONTROLLER_LOGIN_ARGUMENT_LOSE_ERROR(2501, "用户名或密码为空"),
+    CONTROLLER_LOGIN_FAIL(2502, "用户名或密码错误"),
+    CONTROLLER_LOGIN_HAS_NO_TOKEN_ERROR(2503, "丢失token，拒绝服务"),
 
     ;
 

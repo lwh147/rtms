@@ -14,7 +14,9 @@ import com.lwh147.rtms.backstage.util.BeanUtil;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @description: 管理员控制器接口实现
@@ -54,7 +56,7 @@ public class AdminController implements AdminControllerApi {
     }
 
     @Override
-    @GetMapping("/{id}")
+    @GetMapping("{id}")
     public AdminVO queryById(@PathVariable("id") Long id) {
         if (id == null) {
             throw new CommonException(ControllerExceptionCode.CONTROLLER_ARGUMENT_ID_EMPTY_ERROR);
@@ -114,5 +116,41 @@ public class AdminController implements AdminControllerApi {
             return BeanUtil.copy(adminDTO, AdminVO.class);
         }
         throw new CommonException(ControllerExceptionCode.CONTROLLER_LOGIN_ARGUMENT_EMPTY_ERROR);
+    }
+
+    @Override
+    @PostMapping("loginFromBackstage")
+    public Map<String, Object> loginFromBackstage(@RequestBody LoginFormVO loginFormVO) {
+        if (loginFormVO == null) {
+            throw new CommonException(ControllerExceptionCode.CONTROLLER_LOGIN_ARGUMENT_EMPTY_ERROR);
+        }
+        if (loginFormVO.getAccount() == null || loginFormVO.getPassword() == null) {
+            throw new CommonException(ControllerExceptionCode.CONTROLLER_LOGIN_ARGUMENT_LOSE_ERROR);
+        }
+        AdminDTO adminDTO = adminService.loginFromBackstage(BeanUtil.copy(loginFormVO, AdminQuery.class));
+        if (adminDTO == null) {
+            throw new CommonException(ControllerExceptionCode.CONTROLLER_LOGIN_FAIL);
+        }
+        Map<String, Object> resultMap = new HashMap<>();
+        resultMap.put("token", "testToken");
+        return resultMap;
+    }
+
+    @Override
+    @GetMapping("info")
+    public Map<String, Object> getAdminInfo(@RequestParam("token") String token) {
+        if (token == null) {
+            throw new CommonException(ControllerExceptionCode.CONTROLLER_LOGIN_HAS_NO_TOKEN_ERROR);
+        }
+        Map<String, Object> resultMap = new HashMap<>();
+        resultMap.put("name", "admin");
+        resultMap.put("avatar", "https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif");
+        return resultMap;
+    }
+
+    @Override
+    @PostMapping("logout")
+    public Boolean logout() {
+        return true;
     }
 }

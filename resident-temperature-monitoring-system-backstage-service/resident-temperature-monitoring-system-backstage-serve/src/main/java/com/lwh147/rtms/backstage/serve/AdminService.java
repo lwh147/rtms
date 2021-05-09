@@ -41,4 +41,9 @@ public interface AdminService {
      * 登录
      **/
     AdminDTO loginFromApp(AdminQuery adminQuery);
+
+    /**
+     * 登录
+     **/
+    AdminDTO loginFromBackstage(AdminQuery adminQuery);
 }

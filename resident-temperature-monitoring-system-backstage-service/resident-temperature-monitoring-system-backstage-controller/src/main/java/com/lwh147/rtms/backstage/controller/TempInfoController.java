@@ -69,7 +69,7 @@ public class TempInfoController implements TempInfoControllerApi {
     }
 
     @Override
-    @GetMapping("/total")
+    @GetMapping("total")
     public Integer total(TempInfoQuery tempInfoQuery) {
         if (tempInfoQuery == null) {
             throw new CommonException(ControllerExceptionCode.CONTROLLER_ARGUMENT_LOSE_ERROR);
@@ -78,7 +78,7 @@ public class TempInfoController implements TempInfoControllerApi {
     }
 
     @Override
-    @GetMapping("/charData")
+    @GetMapping("charData")
     public List<Map<String, Object>> charData(TempInfoQuery tempInfoQuery) {
         if (tempInfoQuery == null) {
             throw new CommonException(ControllerExceptionCode.CONTROLLER_ARGUMENT_LOSE_ERROR);
@@ -98,7 +98,7 @@ public class TempInfoController implements TempInfoControllerApi {
     }
 
     @Override
-    @GetMapping("/charData/resident")
+    @GetMapping("charData/resident")
     public List<Map<String, Object>> getTempByResidentId(TempInfoQuery tempInfoQuery) {
         if (tempInfoQuery == null) {
             throw new CommonException(ControllerExceptionCode.CONTROLLER_ARGUMENT_QUERY_EMPTY_ERROR);
@@ -113,7 +113,7 @@ public class TempInfoController implements TempInfoControllerApi {
     }
 
     @Override
-    @GetMapping("/charData/all")
+    @GetMapping("charData/all")
     public List<Map<String, Object>> getTempOf15() {
         return tempInfoService.getTempOf15();
     }

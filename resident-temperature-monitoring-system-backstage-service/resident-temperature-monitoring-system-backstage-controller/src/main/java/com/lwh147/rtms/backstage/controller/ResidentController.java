@@ -53,7 +53,7 @@ public class ResidentController implements ResidentControllerApi {
     }
 
     @Override
-    @GetMapping("/{id}")
+    @GetMapping("{id}")
     public ResidentVO queryById(@PathVariable("id") Long id) {
         if (id == null) {
             throw new CommonException(ControllerExceptionCode.CONTROLLER_ARGUMENT_ID_EMPTY_ERROR);

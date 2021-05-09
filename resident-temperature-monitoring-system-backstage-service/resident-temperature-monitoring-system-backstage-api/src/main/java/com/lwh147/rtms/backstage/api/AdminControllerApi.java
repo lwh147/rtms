@@ -8,6 +8,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @description: 管理员相关控制器接口
@@ -52,4 +53,23 @@ public interface AdminControllerApi {
      **/
     @ApiOperation(value = "客户端管理员登录验证")
     AdminVO loginFromApp(@ApiParam(required = true) LoginFormVO loginFormVO);
+
+    /**
+     * 登陆验证
+     **/
+    @ApiOperation(value = "后台管理员登录验证")
+    Map<String, Object> loginFromBackstage(@ApiParam(required = true) LoginFormVO loginFormVO);
+
+    /**
+     * 获取管理员信息
+     **/
+    @ApiOperation(value = "获取管理员信息")
+    Map<String, Object> getAdminInfo(@ApiParam(required = true) String token);
+
+    /**
+     * 退出登录
+     **/
+    @ApiOperation(value = "退出登录")
+    Boolean logout();
+
 }
