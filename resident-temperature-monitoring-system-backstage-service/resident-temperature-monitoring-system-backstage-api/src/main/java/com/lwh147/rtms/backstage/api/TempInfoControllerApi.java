@@ -2,6 +2,7 @@ package com.lwh147.rtms.backstage.api;
 
 import com.lwh147.rtms.backstage.pojo.query.TempInfoQuery;
 import com.lwh147.rtms.backstage.pojo.vo.TempInfoVO;
+import com.lwh147.rtms.backstage.pojo.vo.TempInfoWithFaceVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -22,6 +23,12 @@ public interface TempInfoControllerApi {
      **/
     @ApiOperation(value = "添加体温信息")
     Boolean add(@ApiParam(required = true) TempInfoVO tempInfoVO);
+
+    /**
+     * 添加体温信息(带人脸图片)
+     **/
+    @ApiOperation(value = "添加体温信息(带人脸图片)，picture参数为图片的base64编码字符串")
+    Boolean add(@ApiParam(required = true, value = "添加体温信息(带人脸图片base64编码字符串)") TempInfoWithFaceVO tempInfoWithFace);
 
     /**
      * 根据综合查询条件查询体温信息

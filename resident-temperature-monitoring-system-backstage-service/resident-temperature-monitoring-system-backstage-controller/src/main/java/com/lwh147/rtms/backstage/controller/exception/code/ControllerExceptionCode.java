@@ -29,6 +29,12 @@ public enum ControllerExceptionCode implements CommonExceptionCode {
     CONTROLLER_LOGIN_FAIL(2502, "用户名或密码错误"),
     CONTROLLER_LOGIN_HAS_NO_TOKEN_ERROR(2503, "丢失token，拒绝服务"),
 
+    /**
+     * 请求相关
+     **/
+    CONTROLLER_REQUEST_FAIL_ERROR(2701, "调用远程api服务出错"),
+    CONTROLLER_NO_SUCH_PEOPLE_ERROR(2702, "此人不是小区居民，拒绝添加体温信息"),
+
     ;
 
     /**
