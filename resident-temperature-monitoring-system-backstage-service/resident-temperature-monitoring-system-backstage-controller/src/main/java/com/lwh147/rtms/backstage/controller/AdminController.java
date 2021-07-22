@@ -1,9 +1,12 @@
 package com.lwh147.rtms.backstage.controller;
 
 import cn.hutool.core.bean.BeanException;
+import com.alibaba.fastjson.JSON;
 import com.lwh147.rtms.backstage.api.AdminControllerApi;
 import com.lwh147.rtms.backstage.common.annotation.Page;
+import com.lwh147.rtms.backstage.common.config.RedisUtils;
 import com.lwh147.rtms.backstage.common.exception.CommonException;
+import com.lwh147.rtms.backstage.common.exception.code.CommonExceptionCodeImpl;
 import com.lwh147.rtms.backstage.controller.exception.code.ControllerExceptionCode;
 import com.lwh147.rtms.backstage.pojo.dto.AdminDTO;
 import com.lwh147.rtms.backstage.pojo.query.AdminQuery;
@@ -11,12 +14,17 @@ import com.lwh147.rtms.backstage.pojo.vo.AdminVO;
 import com.lwh147.rtms.backstage.pojo.vo.LoginFormVO;
 import com.lwh147.rtms.backstage.serve.AdminService;
 import com.lwh147.rtms.backstage.util.BeanUtil;
+import com.lwh147.rtms.backstage.util.JWTUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * @description: 管理员控制器接口实现
@@ -25,11 +33,13 @@ import java.util.Map;
  * @version: v1.0
  **/
 @RestController
-@CrossOrigin
+// @CrossOrigin
 @RequestMapping("/admin")
 public class AdminController implements AdminControllerApi {
     @Resource
     private AdminService adminService;
+    @Resource
+    private RedisUtils redisUtils;
 
     @Override
     @PostMapping("")
@@ -132,25 +142,33 @@ public class AdminController implements AdminControllerApi {
             throw new CommonException(ControllerExceptionCode.CONTROLLER_LOGIN_FAIL);
         }
         Map<String, Object> resultMap = new HashMap<>();
-        resultMap.put("token", "testToken");
+        Map<String, Object> userInfo = new HashMap<>();
+        userInfo.put("name", "admin");
+        userInfo.put("avatar", "https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif");
+        String token = JWTUtils.createToken();
+        resultMap.put("token", token);
+        redisUtils.expireSet(token, userInfo, 15 * 60);
         return resultMap;
     }
 
     @Override
     @GetMapping("info")
-    public Map<String, Object> getAdminInfo(@RequestParam("token") String token) {
+    public Map<?, ?> getAdminInfo(@RequestParam("token") String token) {
         if (token == null) {
             throw new CommonException(ControllerExceptionCode.CONTROLLER_LOGIN_HAS_NO_TOKEN_ERROR);
         }
-        Map<String, Object> resultMap = new HashMap<>();
-        resultMap.put("name", "admin");
-        resultMap.put("avatar", "https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif");
-        return resultMap;
+        Object object = redisUtils.get(token);
+        if (Objects.isNull(object)) {
+            throw new CommonException(CommonExceptionCodeImpl.COMMON_NOT_LOGIN_ERROR);
+        }
+        return JSON.parseObject(JSON.toJSONString(object), Map.class);
     }
 
     @Override
     @PostMapping("logout")
     public Boolean logout() {
+        HttpServletRequest request = ((ServletRequestAttributes) (RequestContextHolder.currentRequestAttributes())).getRequest();
+        redisUtils.remove(request.getHeader("X-Token"));
         return true;
     }
 }

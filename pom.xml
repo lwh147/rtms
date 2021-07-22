@@ -40,6 +40,8 @@
         <junit.version>4.12</junit.version>
         <commons.beanutils.version>1.9.4</commons.beanutils.version>
         <commons.lang3.version>3.9</commons.lang3.version>
+
+        <jwt.version>0.9.1</jwt.version>
     </properties>
 
     <dependencyManagement>
@@ -167,6 +169,13 @@
                 <artifactId>commons-lang3</artifactId>
                 <version>${commons.lang3.version}</version>
             </dependency>
+
+            <!-- jwt token -->
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt</artifactId>
+                <version>${jwt.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -195,10 +204,10 @@
         </dependency>
 
         <!-- springcloud alibaba nacos相关 -->
-        <!--        <dependency>-->
-        <!--            <groupId>com.alibaba.cloud</groupId>-->
-        <!--            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>-->
-        <!--        </dependency>-->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+        </dependency>
 
         <!-- 测试 -->
         <dependency>

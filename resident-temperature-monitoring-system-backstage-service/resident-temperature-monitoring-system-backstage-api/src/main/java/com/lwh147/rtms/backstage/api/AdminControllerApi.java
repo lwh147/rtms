@@ -64,7 +64,7 @@ public interface AdminControllerApi {
      * 获取管理员信息
      **/
     @ApiOperation(value = "获取管理员信息")
-    Map<String, Object> getAdminInfo(@ApiParam(required = true) String token);
+    Map<?, ?> getAdminInfo(@ApiParam(required = true) String token);
 
     /**
      * 退出登录

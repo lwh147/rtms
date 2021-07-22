@@ -29,7 +29,7 @@ import java.util.*;
  * @version: v1.0
  **/
 @RestController
-@CrossOrigin
+// @CrossOrigin
 @RequestMapping("/tempInfo")
 public class TempInfoController implements TempInfoControllerApi {
     public static final String token_api = "https://aip.baidubce.com/oauth/2.0/token";

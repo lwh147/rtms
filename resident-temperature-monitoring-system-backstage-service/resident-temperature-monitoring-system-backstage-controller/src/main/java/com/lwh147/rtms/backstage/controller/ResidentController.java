@@ -22,7 +22,7 @@ import java.util.List;
  * @version: v1.0
  **/
 @RestController
-@CrossOrigin
+// @CrossOrigin
 @RequestMapping("/resident")
 public class ResidentController implements ResidentControllerApi {
     @Resource

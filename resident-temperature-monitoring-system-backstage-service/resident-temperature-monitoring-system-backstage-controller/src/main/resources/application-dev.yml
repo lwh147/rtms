@@ -11,14 +11,12 @@ spring:
     nacos:
       discovery:
         server-addr: 182.92.106.123:8848
-        ip: 182.92.106.123
-        port: 8081
 
   # 数据库连接配置
   datasource:
     url: jdbc:mysql://182.92.106.123/rtms?characterEncoding=UTF-8&serverTimezone=GMT%2B8&useSSL=false
     username: root
-    password: 123456
+    password: lwh720626.
     # 数据库连接池配置
     driver-class-name: com.mysql.jdbc.Driver
     type: com.zaxxer.hikari.HikariDataSource
@@ -30,7 +28,7 @@ spring:
       auto-commit: true
       pool-name: basedata_db_pool
 
-  # json 配置
+  # jackson 配置
   jackson:
     date-format: yyyy/MM/dd HH:mm:ss
     time-zone: GMT+8
@@ -39,7 +37,7 @@ spring:
   redis:
     host: 182.92.106.123
     port: 6379
-    password: 123456
+    password: lwh720626.
 
   # spring缓存配置
   cache:

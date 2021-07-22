@@ -6,11 +6,31 @@ spring:
   application:
     name: resident-temperature-monitoring-system-gateway-service
 
+  # redis配置
+  redis:
+    host: 182.92.106.123
+    port: 6379
+    password: lwh720626.
+
+  # spring缓存配置
+  cache:
+    type: redis
+
   # 配置Nacos地址
   cloud:
     nacos:
       discovery:
         server-addr: 182.92.106.123:8848
-        ip: 182.92.106.123
-        port: 9001
+
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      # 可以手动配置是否开启网关服务
+      enabled: true
+      routes:
+        - id: resident-temperature-monitoring-system-backstage-service
+          uri: lb://resident-temperature-monitoring-system-backstage-service
+          predicates:
+            - Path=/admin/**, /resident/**, /tempInfo/**
 
