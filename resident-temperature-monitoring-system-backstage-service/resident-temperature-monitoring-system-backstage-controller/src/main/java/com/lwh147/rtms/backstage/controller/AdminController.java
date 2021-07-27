@@ -15,6 +15,7 @@ import com.lwh147.rtms.backstage.pojo.vo.LoginFormVO;
 import com.lwh147.rtms.backstage.serve.AdminService;
 import com.lwh147.rtms.backstage.util.BeanUtil;
 import com.lwh147.rtms.backstage.util.JWTUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -35,6 +36,7 @@ import java.util.Objects;
 @RestController
 // @CrossOrigin
 @RequestMapping("/admin")
+@Slf4j
 public class AdminController implements AdminControllerApi {
     @Resource
     private AdminService adminService;
@@ -143,11 +145,42 @@ public class AdminController implements AdminControllerApi {
         }
         Map<String, Object> resultMap = new HashMap<>();
         Map<String, Object> userInfo = new HashMap<>();
+
         userInfo.put("name", "admin");
         userInfo.put("avatar", "https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif");
+
         String token = JWTUtils.createToken();
-        resultMap.put("token", token);
         redisUtils.expireSet(token, userInfo, 15 * 60);
+        String refreshToken = JWTUtils.createRefreshToken();
+        redisUtils.expireSet(refreshToken, "refresh_token", 7 * 24 * 60 * 60);
+
+        resultMap.put("access_token", token);
+        resultMap.put("refresh_token", refreshToken);
+
+        return resultMap;
+    }
+
+    @GetMapping("loginFromBackstage/refresh")
+    public Map<String, Object> refreshToken() {
+        HttpServletRequest request = ((ServletRequestAttributes) (RequestContextHolder.currentRequestAttributes())).getRequest();
+        String refreshToken = request.getHeader("X-Token");
+        Object obj = redisUtils.get(refreshToken);
+        if (Objects.isNull(obj)) {
+            throw new CommonException(CommonExceptionCodeImpl.COMMON_NOT_LOGIN_ERROR);
+        }
+        Map<String, Object> resultMap = new HashMap<>();
+        Map<String, Object> userInfo = new HashMap<>();
+
+        userInfo.put("name", "admin");
+        userInfo.put("avatar", "https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif");
+
+        String token = JWTUtils.createToken();
+        redisUtils.expireSet(token, userInfo, 15 * 60);
+
+        log.info("设置了新的token到redis中：{}", token);
+
+        resultMap.put("access_token", token);
+
         return resultMap;
     }
 
@@ -166,9 +199,11 @@ public class AdminController implements AdminControllerApi {
 
     @Override
     @PostMapping("logout")
-    public Boolean logout() {
+    public Boolean logout(@RequestBody Map<String, String> map) {
         HttpServletRequest request = ((ServletRequestAttributes) (RequestContextHolder.currentRequestAttributes())).getRequest();
         redisUtils.remove(request.getHeader("X-Token"));
+        log.info("接收到的refreshToken: {}", map.get("refreshToken"));
+        redisUtils.remove(map.get("refreshToken"));
         return true;
     }
 }

@@ -70,6 +70,6 @@ public interface AdminControllerApi {
      * 退出登录
      **/
     @ApiOperation(value = "退出登录")
-    Boolean logout();
+    Boolean logout(Map<String, String> map);
 
 }

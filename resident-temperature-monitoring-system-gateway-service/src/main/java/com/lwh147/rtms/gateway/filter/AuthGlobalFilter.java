@@ -55,15 +55,16 @@ public class AuthGlobalFilter implements GlobalFilter, Ordered {
         }
 
 
-        // 鉴权
         token = tokenList.get(0);
         log.info("获取到的token：{}", token);
-        Object object = redisUtils.get(token);
-        if (Objects.isNull(object)) {
+
+        // 鉴权
+        if (!authentication(token)) {
+            log.info("token鉴权失败");
             ServerHttpResponse response = exchange.getResponse();
             return out(response, CommonExceptionCodeImpl.COMMON_AUTH_ERROR);
         }
-        log.info("根据token获取到的用户信息：{}", JSON.toJSONString(object));
+        log.info("token鉴权通过");
         return chain.filter(exchange);
     }
 
@@ -78,8 +79,17 @@ public class AuthGlobalFilter implements GlobalFilter, Ordered {
         byte[] bits = JSONObject.toJSONString(commonResponse).getBytes(StandardCharsets.UTF_8);
         DataBuffer buffer = response.bufferFactory().wrap(bits);
         //指定编码，否则在浏览器中会中文乱码
-        response.getHeaders().add("Content-Type", "application/json;charset=UTF-8");
+        response.getHeaders().set("Content-Type", "application/json;charset=UTF-8");
         return response.writeWith(Mono.just(buffer));
+    }
+
+    private boolean authentication(String token) {
+        Object object = redisUtils.get(token);
+        if (Objects.isNull(object)) {
+            return false;
+        }
+        log.info("根据token获取到的用户信息：{}", JSON.toJSONString(object));
+        return true;
     }
 
     @Override

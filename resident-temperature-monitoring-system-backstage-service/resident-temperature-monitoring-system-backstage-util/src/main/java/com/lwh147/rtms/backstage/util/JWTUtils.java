@@ -19,6 +19,10 @@ public class JWTUtils {
      **/
     public final static long EXPIRE = 15 * 60 * 1000;
     /**
+     * token有效时长
+     **/
+    public final static long REFRESH_EXPIRE = 7 * 24 * 60 * 60 * 1000;
+    /**
      * token签名私钥
      **/
     public final static String SECRET = "rtms_token_secret_lwh147";
@@ -26,16 +30,29 @@ public class JWTUtils {
      * token名称
      **/
     public final static String SUBJECT = "RTMS_TOKEN";
+    /**
+     * token名称
+     **/
+    public final static String REFRESH_SUBJECT = "RTMS_REFRESH_TOKEN";
 
     private JWTUtils() {
+    }
+
+    public static String createRefreshToken() {
+        return Jwts.builder()
+                .setSubject(REFRESH_SUBJECT)
+                .signWith(SignatureAlgorithm.HS512, SECRET)
+                .compressWith(CompressionCodecs.GZIP)
+                .setExpiration(new Date(System.currentTimeMillis() + REFRESH_EXPIRE))
+                .compact();
     }
 
     public static String createToken() {
         return Jwts.builder()
                 .setSubject(SUBJECT)
-                .setExpiration(new Date(System.currentTimeMillis() + EXPIRE))
                 .signWith(SignatureAlgorithm.HS512, SECRET)
                 .compressWith(CompressionCodecs.GZIP)
+                .setExpiration(new Date(System.currentTimeMillis() + EXPIRE))
                 .compact();
     }
 
@@ -49,10 +66,10 @@ public class JWTUtils {
         Assert.notNull(payload, "payload不能为空");
         return Jwts.builder()
                 .setSubject(SUBJECT)
-                .setExpiration(new Date(System.currentTimeMillis() + EXPIRE))
                 .signWith(SignatureAlgorithm.HS512, SECRET)
                 .compressWith(CompressionCodecs.GZIP)
                 .setClaims(payload)
+                .setExpiration(new Date(System.currentTimeMillis() + EXPIRE))
                 .compact();
     }
 
@@ -67,6 +84,13 @@ public class JWTUtils {
         Map<String, Object> map = new HashMap<>();
         map.put("id", id);
         return createToken(map);
+    }
+
+    public boolean expired(String token) {
+        Assert.notNull(token, "token不能为空");
+        Jws<Claims> claimsJws = Jwts.parser().setSigningKey(SECRET).parseClaimsJws(token);
+        Date expiration = claimsJws.getBody().getExpiration();
+        return expiration.before(new Date());
     }
 
     /**
@@ -98,8 +122,6 @@ public class JWTUtils {
     }
 
     public static void main(String[] args) {
-        String token = JWTUtils.createToken(123456L);
-        System.out.println("生成的token：" + token);
-        System.out.println("获取id: " + JWTUtils.getId(token));
+
     }
 }
