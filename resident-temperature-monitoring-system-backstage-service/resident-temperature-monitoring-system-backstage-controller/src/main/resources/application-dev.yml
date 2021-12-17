@@ -16,7 +16,7 @@ spring:
 
   # 数据库连接配置
   datasource:
-    url: jdbc:mysql://182.92.106.123/rtms?characterEncoding=UTF-8&serverTimezone=GMT%2B8&useSSL=false
+    url: jdbc:mysql://localhost:3306/rtms?characterEncoding=UTF-8&serverTimezone=GMT%2B8&useSSL=false
     username: root
     password: 123456
     # 数据库连接池配置
@@ -37,7 +37,7 @@ spring:
 
   # redis配置
   redis:
-    host: 182.92.106.123
+    host: localhost
     port: 6379
     password: 123456
 
